@@ -2,10 +2,13 @@
 
 namespace App\Services;
 
+use App\DTOs\PlotsFilterDto;
 use App\DTOs\PlotsListDto;
+use App\Models\Plot;
 use App\Repositories\Contracts\PlotsRepositoryInterface;
-use Illuminate\Support\Collection;
 use App\Repositories\PlotsRepository;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Http;
 
 
 class PlotsService implements Contracts\PlotsServiceInterface
@@ -13,20 +16,44 @@ class PlotsService implements Contracts\PlotsServiceInterface
     /**
      * @param  PlotsRepository  $plotsRepository
      */
-    public function __construct(PlotsRepositoryInterface $plotsRepository)
+    public function __construct(private PlotsRepositoryInterface $plotsRepository)
     {
 
     }
 
     /**
-     * @param  \App\DTOs\PlotsListDto  $data
-     * @return array|\Illuminate\Support\Collection
+     * @param  \App\DTOs\PlotsFilterDto  $plotsFilterData
+     * @return array
+     * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
      */
-    public function getPlotsList(PlotsListDto $data): array|Collection
+    public function getPlotsList(PlotsFilterDto $plotsFilterData): array
     {
-        return [
-            'data' => $data
-        ];
-    }
+        $plots = $this->plotsRepository->getByCns($plotsFilterData)->get();
+        $plotsResult = [];
 
+        foreach ($plotsFilterData->cns as $k => $plotCn) {
+            /** @var Plot $plot */
+            $plot = $plots->where('cn', '=', $plotCn)->first();
+            if ($plot->updated_at->addHour() > Carbon::now()) {
+                unset($plotsFilterData->cns[$k]);
+                $plotsResult[] = $plot->only($plot->getFillable());
+            }
+        }
+
+        if (!empty($plotsFilterData->cns)) {
+            $response = Http::acceptJson()->post('https://api.pkk.bigland.ru/test/plots',
+                [
+                    'collection' => [
+                        'plots' => $plotsFilterData->cns
+                    ]
+                ]
+            );
+
+            $plotsData = new PlotsListDto(plots: $response->json());
+            $this->plotsRepository->syncPlots($plotsData);
+            $plotsResult = array_merge($plotsResult, $plotsData->plots->toArray());
+        }
+
+        return $plotsResult;
+    }
 }

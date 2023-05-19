@@ -2,35 +2,36 @@
 
 namespace App\Repositories;
 
-use DB;
+use App\DTOs\PlotsFilterDto;
+use App\DTOs\PlotsListDto;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Query\Builder;
 
 class PlotsRepository implements Contracts\PlotsRepositoryInterface
 {
 
-    public function __construct(private Model $model)
-    {
-
-    }
+    public function __construct(private Model $model) {}
 
     /**
-     * @param  array  $cns
-     * @return \Illuminate\Database\Query\Builder
+     * @param  \App\DTOs\PlotsFilterDto  $filterDto
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function getByCns(array $cns) : Builder
+    public function getByCns(PlotsFilterDto $filterDto) : Builder
     {
-        return DB::table($this->model->getTable())
+        return $this->model->newQuery()
+            ->whereIn('cn', $filterDto->cns)
             ;
     }
 
     /**
-     * @param  \App\DTOs\PlotsApiResult[]  $data
-     * @return \Illuminate\Database\Query\Builder
+     * @param  \App\DTOs\PlotsListDto  $plotsData
+     * @return bool
      */
-    public function syncPlots(array $data) : Builder
+    public function syncPlots(PlotsListDto $plotsData) : bool
     {
-        return DB::table($this->model->getTable())
-            ;
+        $result = $this->model->newQuery()
+            ->upsert($plotsData->plots->toArray(), 'cn', $this->model->getFillable());
+
+        return $result === count($plotsData->plots);
     }
 }

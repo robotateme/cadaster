@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\DTOs\PlotsFilterDto;
 use App\Services\PlotsService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Database\Eloquent\Model;
 use JetBrains\PhpStorm\NoReturn;
 
 class PlotsCommand extends Command
@@ -37,20 +38,14 @@ class PlotsCommand extends Command
      * Execute the console command.
      *
      * @param  \App\Services\PlotsService  $plotsService
+     * @param  \Illuminate\Database\Eloquent\Model  $plotModel
      * @return int
+     * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
      */
-    #[NoReturn] public function handle(PlotsService $plotsService): int
+    #[NoReturn] public function handle(PlotsService $plotsService, Model $plotModel): int
     {
-        $response = Http::acceptJson()->post('https://api.pkk.bigland.ru/test/plots',
-            [
-                'collection' => [
-                    'plots' => [
-                        '69:27:0000022:1306',
-                        '69:27:0000022:1307'
-                    ]
-                ]
-            ]
-        );
-        dd($response->json());
+        $plotsData = $plotsService->getPlotsList(new PlotsFilterDto(cns: '69:27:0000022:1306, 69:27:0000022:1307'));
+        $this->table($plotModel->getFillable(), $plotsData);
+        return 0;
     }
 }

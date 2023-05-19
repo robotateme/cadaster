@@ -35,4 +35,16 @@ class Plot extends Model
     protected $primaryKey = 'cn';
 
     public $incrementing = false;
+
+    protected $fillable = [
+        'cn',
+        'area',
+        'price',
+        'address'
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
 }

@@ -2,6 +2,13 @@
 
 namespace App\Providers;
 
+use App\Console\Commands\PlotsCommand;
+use App\Models\Plot;
+use App\Repositories\Contracts\PlotsRepositoryInterface;
+use App\Repositories\PlotsRepository;
+use App\Services\Contracts\PlotsServiceInterface;
+use App\Services\PlotsService;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,9 +18,19 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //
+        $this->app->singleton(PlotsServiceInterface::class,PlotsService::class);
+        $this->app->singleton(PlotsRepositoryInterface::class,PlotsRepository::class);
+        $this->app->singleton(Model::class, Plot::class);
+
+        $this->app->when(PlotsRepository::class)
+            ->needs(Model::class)
+            ->give(Plot::class);
+
+        $this->app->when(PlotsCommand::class)
+            ->needs(Model::class)
+            ->give(Plot::class);
     }
 
     /**
@@ -21,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         //
     }
