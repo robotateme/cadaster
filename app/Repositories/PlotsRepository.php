@@ -19,7 +19,7 @@ class PlotsRepository implements Contracts\PlotsRepositoryInterface
     public function getByCns(PlotsFilterDto $filterDto) : Builder
     {
         return $this->model->newQuery()
-            ->whereIn('cn', $filterDto->cadastral_numbers)
+            ->whereIn('cadastral_number', $filterDto->cadastral_numbers)
             ;
     }
 

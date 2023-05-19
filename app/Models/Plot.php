@@ -26,18 +26,20 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Plot whereCreatedAt($value)
  * @method static Builder|Plot wherePrice($value)
  * @method static Builder|Plot whereUpdatedAt($value)
+ * @property string $cadastral_number
+ * @method static Builder|Plot whereCadastralNumber($value)
  * @mixin \Eloquent
  */
 class Plot extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'cn';
+    protected $primaryKey = 'cadastral_number';
 
     public $incrementing = false;
 
     protected $fillable = [
-        'cn',
+        'cadastral_number',
         'area',
         'price',
         'address'

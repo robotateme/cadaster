@@ -8,7 +8,7 @@ use Spatie\DataTransferObject\DataTransferObject;
 class ApiPlotDto extends DataTransferObject
 {
     #[MapFrom('attrs.plot_number')]
-    public string $cn;
+    public string $cadastral_number;
 
     #[MapFrom('attrs.plot_area')]
     public string $area;

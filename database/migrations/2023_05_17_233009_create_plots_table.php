@@ -11,10 +11,10 @@ class CreatePlotsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('plots', function (Blueprint $table) {
-            $table->string('cn')->primary();
+            $table->string('cadastral_number')->primary();
             $table->text('address');
             $table->decimal('price');
             $table->decimal('area');
@@ -27,7 +27,7 @@ class CreatePlotsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('plots');
     }

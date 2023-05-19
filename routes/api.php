@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\PlotsController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +13,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/', function () {
+    return response()->json(['api' => 'index']);
 });
 
-Route::prefix('plots')->group(function () {
-    Route::get('/get', [PlotsController::class, 'index']);
-});
+Route::get('/plots/list', [PlotsController::class, 'index']);

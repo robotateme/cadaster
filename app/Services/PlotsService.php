@@ -33,18 +33,20 @@ class PlotsService implements Contracts\PlotsServiceInterface
 
         foreach ($plotsFilterData->cadastral_numbers as $k => $plotCn) {
             /** @var Plot $plot */
-            $plot = $plots->where('cn', '=', $plotCn)->first();
-            if ($plot->updated_at->addHour() > Carbon::now()) {
-                unset($plotsFilterData->cadastral_numbers[$k]);
-                $plotsResult[] = $plot->only($plot->getFillable());
+            $plot = $plots->firstWhere('cadastral_number', '=', $plotCn);
+            if (!is_null($plot)) {
+                if ($plot->updated_at->addHour() > Carbon::now()) {
+                    unset($plotsFilterData->cadastral_numbers[$k]);
+                    $plotsResult[] = $plot->only($plot->getFillable());
+                }
             }
         }
 
-        if (!empty($plotsFilterData->cns)) {
+        if (!empty($plotsFilterData->cadastral_numbers)) {
             $response = Http::acceptJson()->post('https://api.pkk.bigland.ru/test/plots',
                 [
                     'collection' => [
-                        'plots' => $plotsFilterData->cns
+                        'plots' => $plotsFilterData->cadastral_numbers
                     ]
                 ]
             );

@@ -11,6 +11,8 @@ namespace PHPSTORM_META {
     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
+            'App\Repositories\Contracts\PlotsRepositoryInterface' => \App\Repositories\PlotsRepository::class,
+            'App\Services\Contracts\PlotsServiceInterface' => \App\Services\PlotsService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -45,6 +47,7 @@ namespace PHPSTORM_META {
             'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
             'Illuminate\Contracts\Validation\UncompromisedVerifier' => \Illuminate\Validation\NotPwnedVerifier::class,
             'Illuminate\Database\Console\DbCommand' => \Illuminate\Database\Console\DbCommand::class,
+            'Illuminate\Database\Eloquent\Model' => \App\Models\Plot::class,
             'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
             'Illuminate\Foundation\PackageManifest' => \Illuminate\Foundation\PackageManifest::class,
             'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
@@ -190,6 +193,8 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
         '' => '@',
+            'App\Repositories\Contracts\PlotsRepositoryInterface' => \App\Repositories\PlotsRepository::class,
+            'App\Services\Contracts\PlotsServiceInterface' => \App\Services\PlotsService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -224,6 +229,7 @@ namespace PHPSTORM_META {
             'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
             'Illuminate\Contracts\Validation\UncompromisedVerifier' => \Illuminate\Validation\NotPwnedVerifier::class,
             'Illuminate\Database\Console\DbCommand' => \Illuminate\Database\Console\DbCommand::class,
+            'Illuminate\Database\Eloquent\Model' => \App\Models\Plot::class,
             'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
             'Illuminate\Foundation\PackageManifest' => \Illuminate\Foundation\PackageManifest::class,
             'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
@@ -369,6 +375,8 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::get(0), map([
         '' => '@',
+            'App\Repositories\Contracts\PlotsRepositoryInterface' => \App\Repositories\PlotsRepository::class,
+            'App\Services\Contracts\PlotsServiceInterface' => \App\Services\PlotsService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -403,6 +411,7 @@ namespace PHPSTORM_META {
             'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
             'Illuminate\Contracts\Validation\UncompromisedVerifier' => \Illuminate\Validation\NotPwnedVerifier::class,
             'Illuminate\Database\Console\DbCommand' => \Illuminate\Database\Console\DbCommand::class,
+            'Illuminate\Database\Eloquent\Model' => \App\Models\Plot::class,
             'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
             'Illuminate\Foundation\PackageManifest' => \Illuminate\Foundation\PackageManifest::class,
             'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
@@ -548,6 +557,8 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
+            'App\Repositories\Contracts\PlotsRepositoryInterface' => \App\Repositories\PlotsRepository::class,
+            'App\Services\Contracts\PlotsServiceInterface' => \App\Services\PlotsService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -582,6 +593,7 @@ namespace PHPSTORM_META {
             'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
             'Illuminate\Contracts\Validation\UncompromisedVerifier' => \Illuminate\Validation\NotPwnedVerifier::class,
             'Illuminate\Database\Console\DbCommand' => \Illuminate\Database\Console\DbCommand::class,
+            'Illuminate\Database\Eloquent\Model' => \App\Models\Plot::class,
             'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
             'Illuminate\Foundation\PackageManifest' => \Illuminate\Foundation\PackageManifest::class,
             'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
@@ -727,6 +739,8 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
+            'App\Repositories\Contracts\PlotsRepositoryInterface' => \App\Repositories\PlotsRepository::class,
+            'App\Services\Contracts\PlotsServiceInterface' => \App\Services\PlotsService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -761,6 +775,7 @@ namespace PHPSTORM_META {
             'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
             'Illuminate\Contracts\Validation\UncompromisedVerifier' => \Illuminate\Validation\NotPwnedVerifier::class,
             'Illuminate\Database\Console\DbCommand' => \Illuminate\Database\Console\DbCommand::class,
+            'Illuminate\Database\Eloquent\Model' => \App\Models\Plot::class,
             'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
             'Illuminate\Foundation\PackageManifest' => \Illuminate\Foundation\PackageManifest::class,
             'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
@@ -906,6 +921,8 @@ namespace PHPSTORM_META {
         ]));
     override(\App::get(0), map([
         '' => '@',
+            'App\Repositories\Contracts\PlotsRepositoryInterface' => \App\Repositories\PlotsRepository::class,
+            'App\Services\Contracts\PlotsServiceInterface' => \App\Services\PlotsService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -940,6 +957,7 @@ namespace PHPSTORM_META {
             'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
             'Illuminate\Contracts\Validation\UncompromisedVerifier' => \Illuminate\Validation\NotPwnedVerifier::class,
             'Illuminate\Database\Console\DbCommand' => \Illuminate\Database\Console\DbCommand::class,
+            'Illuminate\Database\Eloquent\Model' => \App\Models\Plot::class,
             'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
             'Illuminate\Foundation\PackageManifest' => \Illuminate\Foundation\PackageManifest::class,
             'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
@@ -1085,6 +1103,8 @@ namespace PHPSTORM_META {
         ]));
     override(\App::make(0), map([
         '' => '@',
+            'App\Repositories\Contracts\PlotsRepositoryInterface' => \App\Repositories\PlotsRepository::class,
+            'App\Services\Contracts\PlotsServiceInterface' => \App\Services\PlotsService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -1119,6 +1139,7 @@ namespace PHPSTORM_META {
             'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
             'Illuminate\Contracts\Validation\UncompromisedVerifier' => \Illuminate\Validation\NotPwnedVerifier::class,
             'Illuminate\Database\Console\DbCommand' => \Illuminate\Database\Console\DbCommand::class,
+            'Illuminate\Database\Eloquent\Model' => \App\Models\Plot::class,
             'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
             'Illuminate\Foundation\PackageManifest' => \Illuminate\Foundation\PackageManifest::class,
             'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
@@ -1264,6 +1285,8 @@ namespace PHPSTORM_META {
         ]));
     override(\App::makeWith(0), map([
         '' => '@',
+            'App\Repositories\Contracts\PlotsRepositoryInterface' => \App\Repositories\PlotsRepository::class,
+            'App\Services\Contracts\PlotsServiceInterface' => \App\Services\PlotsService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -1298,6 +1321,7 @@ namespace PHPSTORM_META {
             'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
             'Illuminate\Contracts\Validation\UncompromisedVerifier' => \Illuminate\Validation\NotPwnedVerifier::class,
             'Illuminate\Database\Console\DbCommand' => \Illuminate\Database\Console\DbCommand::class,
+            'Illuminate\Database\Eloquent\Model' => \App\Models\Plot::class,
             'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
             'Illuminate\Foundation\PackageManifest' => \Illuminate\Foundation\PackageManifest::class,
             'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
@@ -1443,6 +1467,8 @@ namespace PHPSTORM_META {
         ]));
     override(\app(0), map([
         '' => '@',
+            'App\Repositories\Contracts\PlotsRepositoryInterface' => \App\Repositories\PlotsRepository::class,
+            'App\Services\Contracts\PlotsServiceInterface' => \App\Services\PlotsService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -1477,6 +1503,7 @@ namespace PHPSTORM_META {
             'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
             'Illuminate\Contracts\Validation\UncompromisedVerifier' => \Illuminate\Validation\NotPwnedVerifier::class,
             'Illuminate\Database\Console\DbCommand' => \Illuminate\Database\Console\DbCommand::class,
+            'Illuminate\Database\Eloquent\Model' => \App\Models\Plot::class,
             'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
             'Illuminate\Foundation\PackageManifest' => \Illuminate\Foundation\PackageManifest::class,
             'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
@@ -1622,6 +1649,8 @@ namespace PHPSTORM_META {
         ]));
     override(\resolve(0), map([
         '' => '@',
+            'App\Repositories\Contracts\PlotsRepositoryInterface' => \App\Repositories\PlotsRepository::class,
+            'App\Services\Contracts\PlotsServiceInterface' => \App\Services\PlotsService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -1656,6 +1685,7 @@ namespace PHPSTORM_META {
             'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
             'Illuminate\Contracts\Validation\UncompromisedVerifier' => \Illuminate\Validation\NotPwnedVerifier::class,
             'Illuminate\Database\Console\DbCommand' => \Illuminate\Database\Console\DbCommand::class,
+            'Illuminate\Database\Eloquent\Model' => \App\Models\Plot::class,
             'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
             'Illuminate\Foundation\PackageManifest' => \Illuminate\Foundation\PackageManifest::class,
             'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
@@ -1801,6 +1831,8 @@ namespace PHPSTORM_META {
         ]));
     override(\Psr\Container\ContainerInterface::get(0), map([
         '' => '@',
+            'App\Repositories\Contracts\PlotsRepositoryInterface' => \App\Repositories\PlotsRepository::class,
+            'App\Services\Contracts\PlotsServiceInterface' => \App\Services\PlotsService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Facade\FlareClient\Flare' => \Facade\FlareClient\Flare::class,
             'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -1835,6 +1867,7 @@ namespace PHPSTORM_META {
             'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
             'Illuminate\Contracts\Validation\UncompromisedVerifier' => \Illuminate\Validation\NotPwnedVerifier::class,
             'Illuminate\Database\Console\DbCommand' => \Illuminate\Database\Console\DbCommand::class,
+            'Illuminate\Database\Eloquent\Model' => \App\Models\Plot::class,
             'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
             'Illuminate\Foundation\PackageManifest' => \Illuminate\Foundation\PackageManifest::class,
             'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,

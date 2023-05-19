@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DTOs\PlotsFilterDto;
 use App\Http\Requests\PlotsListRequest;
 use App\Services\Contracts\PlotsServiceInterface;
+use App\Services\Contracts\ServiceInterface;
 use App\Services\PlotsService;
 
 class PlotsController extends Controller
