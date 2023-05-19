@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Console\Commands\PlotsCommand;
+use App\Http\Controllers\PlotsController;
 use App\Models\Plot;
 use App\Repositories\Contracts\PlotsRepositoryInterface;
 use App\Repositories\PlotsRepository;
@@ -24,6 +25,12 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(PlotsRepositoryInterface::class,PlotsRepository::class);
         $this->app->singleton(Model::class, Plot::class);
 
+
+        $this->app->when(PlotsController::class)
+            ->needs(PlotsServiceInterface::class)
+            ->give(PlotsService::class)
+        ;
+
         $this->app->when(PlotsRepository::class)
             ->needs(Model::class)
             ->give(Plot::class);
@@ -31,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->when(PlotsCommand::class)
             ->needs(Model::class)
             ->give(Plot::class);
+
+
     }
 
     /**

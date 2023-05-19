@@ -24,7 +24,7 @@ class PlotsListRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'cadastral_numbers' => ['required', 'regex:/^((\d+)(:\s*\d+){3},(\s*)?)*((\d+)(:\s*\d+){3}(\s*)?)$/']
         ];
     }
 }

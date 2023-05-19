@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\DTOs\PlotsFilterDto;
-use App\DTOs\PlotsListDto;
+use App\DTOs\ApiPlotsListDto;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,15 +19,15 @@ class PlotsRepository implements Contracts\PlotsRepositoryInterface
     public function getByCns(PlotsFilterDto $filterDto) : Builder
     {
         return $this->model->newQuery()
-            ->whereIn('cn', $filterDto->cns)
+            ->whereIn('cn', $filterDto->cadastral_numbers)
             ;
     }
 
     /**
-     * @param  \App\DTOs\PlotsListDto  $plotsData
+     * @param  \App\DTOs\ApiPlotsListDto  $plotsData
      * @return bool
      */
-    public function syncPlots(PlotsListDto $plotsData) : bool
+    public function syncPlots(ApiPlotsListDto $plotsData) : bool
     {
         $result = $this->model->newQuery()
             ->upsert($plotsData->plots->toArray(), 'cn', $this->model->getFillable());

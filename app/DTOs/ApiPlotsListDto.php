@@ -7,7 +7,7 @@ use App\DTOs\Collections\PlotsCollection;
 use Spatie\DataTransferObject\Attributes\CastWith;
 use Spatie\DataTransferObject\DataTransferObject;
 
-class PlotsListDto extends DataTransferObject
+class ApiPlotsListDto extends DataTransferObject
 {
     #[CastWith(PlotsCollectionCaster::class)]
     public PlotsCollection $plots;

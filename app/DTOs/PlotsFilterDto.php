@@ -9,5 +9,5 @@ use Spatie\DataTransferObject\DataTransferObject;
 class PlotsFilterDto extends DataTransferObject
 {
     #[CastWith(StringArrayCaster::class)]
-    public array $cns = [];
+    public array $cadastral_numbers = [];
 }

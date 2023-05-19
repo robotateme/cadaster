@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\DTOs\PlotsFilterDto;
-use App\DTOs\PlotsListDto;
+use App\DTOs\ApiPlotsListDto;
 use App\Models\Plot;
 use App\Repositories\Contracts\PlotsRepositoryInterface;
 use App\Repositories\PlotsRepository;
@@ -31,11 +31,11 @@ class PlotsService implements Contracts\PlotsServiceInterface
         $plots = $this->plotsRepository->getByCns($plotsFilterData)->get();
         $plotsResult = [];
 
-        foreach ($plotsFilterData->cns as $k => $plotCn) {
+        foreach ($plotsFilterData->cadastral_numbers as $k => $plotCn) {
             /** @var Plot $plot */
             $plot = $plots->where('cn', '=', $plotCn)->first();
             if ($plot->updated_at->addHour() > Carbon::now()) {
-                unset($plotsFilterData->cns[$k]);
+                unset($plotsFilterData->cadastral_numbers[$k]);
                 $plotsResult[] = $plot->only($plot->getFillable());
             }
         }
@@ -49,7 +49,7 @@ class PlotsService implements Contracts\PlotsServiceInterface
                 ]
             );
 
-            $plotsData = new PlotsListDto(plots: $response->json());
+            $plotsData = new ApiPlotsListDto(plots: $response->json());
             $this->plotsRepository->syncPlots($plotsData);
             $plotsResult = array_merge($plotsResult, $plotsData->plots->toArray());
         }

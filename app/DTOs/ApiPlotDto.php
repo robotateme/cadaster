@@ -5,7 +5,7 @@ namespace App\DTOs;
 use Spatie\DataTransferObject\Attributes\MapFrom;
 use Spatie\DataTransferObject\DataTransferObject;
 
-class PlotDto extends DataTransferObject
+class ApiPlotDto extends DataTransferObject
 {
     #[MapFrom('attrs.plot_number')]
     public string $cn;

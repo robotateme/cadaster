@@ -44,7 +44,7 @@ class PlotsCommand extends Command
      */
     #[NoReturn] public function handle(PlotsService $plotsService, Model $plotModel): int
     {
-        $plotsData = $plotsService->getPlotsList(new PlotsFilterDto(cns: '69:27:0000022:1306, 69:27:0000022:1307'));
+        $plotsData = $plotsService->getPlotsList(new PlotsFilterDto(cadastral_numbers: '69:27:0000022:1306, 69:27:0000022:1307'));
         $this->table($plotModel->getFillable(), $plotsData);
         return 0;
     }

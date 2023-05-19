@@ -3,7 +3,7 @@
 namespace App\DTOs\Casts;
 
 use App\DTOs\Collections\PlotsCollection;
-use App\DTOs\PlotDto;
+use App\DTOs\ApiPlotDto;
 use Spatie\DataTransferObject\Caster;
 
 class PlotsCollectionCaster implements Caster
@@ -15,6 +15,6 @@ class PlotsCollectionCaster implements Caster
      */
     public function cast(mixed $value): PlotsCollection
     {
-        return new PlotsCollection(array_map(fn(array $data) => new PlotDto(...$data), $value));
+        return new PlotsCollection(array_map(fn(array $data) => new ApiPlotDto(...$data), $value));
     }
 }

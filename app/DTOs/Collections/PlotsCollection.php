@@ -2,7 +2,7 @@
 
 namespace App\DTOs\Collections;
 
-use App\DTOs\PlotDto;
+use App\DTOs\ApiPlotDto;
 use Illuminate\Support\Collection;
 use Spatie\DataTransferObject\DataTransferObject;
 
@@ -10,9 +10,9 @@ class PlotsCollection extends Collection
 {
     /**
      * @param $key
-     * @return \App\DTOs\PlotDto
+     * @return \App\DTOs\ApiPlotDto
      */
-    public function offsetGet($key) : PlotDto
+    public function offsetGet($key) : ApiPlotDto
     {
         return parent::offsetGet($key);
     }
