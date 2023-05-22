@@ -6,8 +6,6 @@ use App\DTOs\PlotsFilterDto;
 use App\Services\PlotsService;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
-use Lib\Rosstat\Client\RosstatClient;
-use Lib\Rosstat\Requests\PlotsRequest;
 
 class PlotsCommand extends Command
 {
