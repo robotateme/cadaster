@@ -2,13 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\DTOs\ApiPlotsListDto;
 use App\DTOs\PlotsFilterDto;
-use App\Models\Plot;
 use App\Services\PlotsService;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Http;
 use JetBrains\PhpStorm\NoReturn;
 
 class PlotsCommand extends Command
@@ -44,7 +41,6 @@ class PlotsCommand extends Command
      * @param  \Illuminate\Database\Eloquent\Model  $plotModel
      * @return int
      * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
-     * @throws \ReflectionException
      */
     #[NoReturn] public function handle(PlotsService $plotsService, Model $plotModel): int
     {
