@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'rosstat_url' => env('ROSSTAT_URL', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

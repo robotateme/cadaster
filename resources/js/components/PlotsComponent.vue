@@ -14,9 +14,13 @@
                 id="cadastral_numbers"
                 name="cadastral_numbers"
                 type="text"
+                :state="validationState.cadastral_numbers_state"
                 required
             >
             </b-form-input>
+            <b-form-invalid-feedback>
+              {{errors.cadastral_numbers}}
+            </b-form-invalid-feedback>
           </b-form-group>
 
           <b-button type="submit" variant="primary">Submit</b-button>
@@ -24,9 +28,7 @@
         </b-form>
       </b-card-text>
       <div class="row justify-content-center">
-        <b-table striped hover bordered :items="plotsData" :fields="fields">
-
-        </b-table>
+        <b-table striped hover bordered :items="plotsData" :fields="fields"></b-table>
       </div>
     </div>
   </div>
@@ -39,39 +41,64 @@ export default {
   components: {CardPlugin},
   data() {
     return {
-      form: {
-        cadastral_numbers: '',
+      validationState: {
+        cadastral_numbers_state: null
       },
-      fields: ['first_name', 'last_name', 'age'],
-      plotsData: [
-        {age: 40, first_name: 'Dickerson', last_name: 'Macdonald'},
-        {age: 21, first_name: 'Larsen', last_name: 'Shaw'},
-        {age: 89, first_name: 'Geneva', last_name: 'Wilson'}
-      ]
+      form: {
+        cadastral_numbers: '69:27:0000022:1306, 69:27:0000022:1307',
+      },
+      fields: [
+        {
+          key: 'cadastral_number',
+          label: 'CN',
+        },
+        {
+          key: 'address',
+          label: 'Address'
+        },
+        {
+          key: 'area',
+          label: 'Area'
+        },
+        {
+          key: 'price',
+          label: 'Price'
+        }],
+      plotsData: [],
+      errors: {
+        cadastral_numbers: 'Empty',
+      },
     };
   },
   methods: {
     onSubmit(event) {
       event.preventDefault();
       console.log(JSON.stringify(this.form))
-      axios.get('https://localhost/api/plots/list?cadastral_numbers=69:27:0000022:1306,69:27:0000022:1307', {
+      axios.get('http://localhost/api/plots/list', {
+        params: this.form,
+        withCredentials: false,
         headers: {
           'Accept': 'application/json',
           'Content-type': 'application/json'
         },
       })
-          .then(response => (this.plotsData = response))
+          .then((response) => {
+            this.validationState.cadastral_numbers_state = true;
+            this.plotsData = response.data?.plots;
+          })
           .catch((err) => {
-            console.log(err);
+            if(err.response.status === 422) {
+                this.errors = err.response.data.errors;
+                this.validationState.cadastral_numbers_state = false
+            }
           })
           .finally(() => {
-            this.loading = false;
           });
     },
     onReset(event) {
       event.preventDefault()
       // Reset our form values
-      this.form.cadastral_numbers = ''
+      this.form.cadastral_numbers = '';
     }
   }
 }

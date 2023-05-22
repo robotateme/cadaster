@@ -11,6 +11,8 @@ use App\Services\Contracts\PlotsServiceInterface;
 use App\Services\PlotsService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use Lib\Rosstat\Client\Contracts\ClientInterface;
+use Lib\Rosstat\Client\RosstatClient;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,7 +26,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(PlotsServiceInterface::class,PlotsService::class);
         $this->app->singleton(PlotsRepositoryInterface::class,PlotsRepository::class);
         $this->app->singleton(Model::class, Plot::class);
+        $this->app->singleton(ClientInterface::class, RosstatClient::class);
 
+        $this->app->when(PlotsService::class)
+            ->needs(ClientInterface::class)
+            ->give(RosstatClient::class);
 
         $this->app->when(PlotsController::class)
             ->needs(PlotsServiceInterface::class)
@@ -38,8 +44,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->when(PlotsCommand::class)
             ->needs(Model::class)
             ->give(Plot::class);
-
-
     }
 
     /**

@@ -8,7 +8,8 @@ use App\Models\Plot;
 use App\Repositories\Contracts\PlotsRepositoryInterface;
 use App\Repositories\PlotsRepository;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Http;
+use Lib\Rosstat\Client\Contracts\ClientInterface;
+use Lib\Rosstat\Requests\PlotsRequest;
 
 
 class PlotsService implements Contracts\PlotsServiceInterface
@@ -16,7 +17,7 @@ class PlotsService implements Contracts\PlotsServiceInterface
     /**
      * @param  PlotsRepository  $plotsRepository
      */
-    public function __construct(private PlotsRepositoryInterface $plotsRepository)
+    public function __construct(private PlotsRepositoryInterface $plotsRepository, private ClientInterface $apiClient)
     {
 
     }
@@ -43,13 +44,8 @@ class PlotsService implements Contracts\PlotsServiceInterface
         }
 
         if (!empty($plotsFilterData->cadastral_numbers)) {
-                $response = Http::acceptJson()->post('https://api.pkk.bigland.ru/test/plots',
-                [
-                    'collection' => [
-                        'plots' => $plotsFilterData->cadastral_numbers
-                    ]
-                ]
-            );
+            $request = new PlotsRequest($plotsFilterData->cadastral_numbers);
+            $response = $this->apiClient->sendRequest($request);
 
             if ($response->ok()) {
                 $plotsData = new ApiPlotsListDto(plots: $response->json());

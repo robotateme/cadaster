@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\DTOs\PlotsFilterDto;
 use App\Http\Requests\PlotsListRequest;
 use App\Services\Contracts\PlotsServiceInterface;
-use App\Services\Contracts\ServiceInterface;
 use App\Services\PlotsService;
 
 class PlotsController extends Controller
@@ -23,7 +22,9 @@ class PlotsController extends Controller
     public function index(PlotsListRequest $request): array
     {
         return [
-            $this->plotsService->getPlotsList(new PlotsFilterDto(...$request->validated())),
+            'plots' => $this->plotsService->getPlotsList(
+                new PlotsFilterDto(...$request->validated())
+            ),
         ];
     }
 }

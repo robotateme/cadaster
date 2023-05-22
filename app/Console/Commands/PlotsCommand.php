@@ -6,7 +6,6 @@ use App\DTOs\PlotsFilterDto;
 use App\Services\PlotsService;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
-use JetBrains\PhpStorm\NoReturn;
 
 class PlotsCommand extends Command
 {
@@ -15,7 +14,7 @@ class PlotsCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'plots:get';
+    protected $signature = 'plots:get {cadastral_numbers*}';
 
     /**
      * The console command description.
@@ -42,10 +41,14 @@ class PlotsCommand extends Command
      * @return int
      * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
      */
-    #[NoReturn] public function handle(PlotsService $plotsService, Model $plotModel): int
+    public function handle(PlotsService $plotsService, Model $plotModel): int
     {
+        $cadastral_numbers = array_map(function ($item) {
+            return preg_replace(['/[,\s]/'], '', $item);
+        }, $this->argument('cadastral_numbers'));
+
         $plotsData = $plotsService->getPlotsList(
-            new PlotsFilterDto(cadastral_numbers: '69:27:0000022:1306, 69:27:0000022:1307')
+            new PlotsFilterDto(cadastral_numbers: $cadastral_numbers)
         );
 
         $this->table($plotModel->getFillable(), $plotsData);
