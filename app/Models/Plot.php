@@ -42,7 +42,8 @@ class Plot extends Model
         'cadastral_number',
         'area',
         'price',
-        'address'
+        'address',
+        'updated_at'
     ];
 
     protected $casts = [

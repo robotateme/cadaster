@@ -14,7 +14,10 @@ class PlotFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'cadastral_number' => $this->faker->swiftBicNumber,
+            'address' => $this->faker->address,
+            'area' => $this->faker->randomFloat(9999999, 100000),
+            'price' => $this->faker->randomFloat(9999999, 100000)
         ];
     }
 }

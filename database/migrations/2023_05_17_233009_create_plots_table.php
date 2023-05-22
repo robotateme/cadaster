@@ -16,8 +16,8 @@ class CreatePlotsTable extends Migration
         Schema::create('plots', function (Blueprint $table) {
             $table->string('cadastral_number')->primary();
             $table->text('address');
-            $table->decimal('price');
-            $table->decimal('area');
+            $table->decimal('price', 12);
+            $table->decimal('area', 12);
             $table->timestamps();
         });
     }

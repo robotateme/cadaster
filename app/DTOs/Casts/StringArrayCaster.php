@@ -12,6 +12,7 @@ class StringArrayCaster implements Caster
         if (is_array($value)) {
             return $value;
         }
+
         return array_map(fn ($item) => trim($item) , explode(',', $value));
     }
 }

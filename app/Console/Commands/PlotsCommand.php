@@ -6,6 +6,8 @@ use App\DTOs\PlotsFilterDto;
 use App\Services\PlotsService;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
+use Lib\Rosstat\Client\RosstatClient;
+use Lib\Rosstat\Requests\PlotsRequest;
 
 class PlotsCommand extends Command
 {
@@ -43,6 +45,7 @@ class PlotsCommand extends Command
      */
     public function handle(PlotsService $plotsService, Model $plotModel): int
     {
+
         $cadastral_numbers = array_map(function ($item) {
             return preg_replace(['/[,\s]/'], '', $item);
         }, $this->argument('cadastral_numbers'));
