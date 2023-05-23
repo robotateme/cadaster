@@ -10,7 +10,6 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
-use function PHPUnit\Framework\assertTrue;
 
 class PlotsServiceTest extends TestCase
 {
