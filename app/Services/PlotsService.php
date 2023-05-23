@@ -8,6 +8,7 @@ use App\Models\Plot;
 use App\Repositories\Contracts\PlotsRepositoryInterface;
 use App\Repositories\PlotsRepository;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Lib\Rosstat\Client\Contracts\ClientInterface;
 use Lib\Rosstat\Requests\PlotsRequest;
 
@@ -24,10 +25,10 @@ class PlotsService implements Contracts\PlotsServiceInterface
 
     /**
      * @param  \App\DTOs\PlotsFilterDto  $plotsFilterData
-     * @return array
+     * @return array|\Illuminate\Support\Collection
      * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
      */
-    public function getPlotsList(PlotsFilterDto $plotsFilterData): array
+    public function getPlotsList(PlotsFilterDto $plotsFilterData): array | Collection
     {
         $plots = $this->plotsRepository->getByCns($plotsFilterData)->get();
         $plotsResult = [];
@@ -38,7 +39,7 @@ class PlotsService implements Contracts\PlotsServiceInterface
             if (!is_null($plot)) {
                 if ($plot->updated_at->addHour() >= Carbon::now()) {
                     unset($plotsFilterData->cadastral_numbers[$k]);
-                    $plotsResult[] = $plot->only($plot->getFillable());
+                    $plotsResult[] = $plot;
                 }
             }
         }
@@ -50,10 +51,10 @@ class PlotsService implements Contracts\PlotsServiceInterface
             if ($response->ok()) {
                 $plotsData = new ApiPlotsListDto(plots: $response->json());
                 $this->plotsRepository->syncPlots($plotsData);
-                $plotsResult = array_merge($plotsResult, $plotsData->plots->toArray());
+                $plotsResult = $plotsData->plots->toModels(Plot::class)->merge($plotsResult);
             }
         }
 
-        return $plotsResult;
+        return collect($plotsResult);
     }
 }

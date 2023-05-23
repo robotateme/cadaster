@@ -13,7 +13,7 @@ abstract class BaseCollection extends Collection
      * @param $key
      * @return \Spatie\DataTransferObject\DataTransferObject|Model
      */
-    public function offsetGet($key) : DataTransferObject| Model
+    public function offsetGet($key): DataTransferObject|Model
     {
         return parent::offsetGet($key);
     }
@@ -38,11 +38,11 @@ abstract class BaseCollection extends Collection
     /**
      * @return $this
      */
-    public function toModels(): static
+    public function toModels(string $modelClass): static
     {
         foreach ($this->items as $k => $item) {
             if ($item instanceof DataTransferObject) {
-                $this->items[$k] = (new Plot())->fill($item->toArray());
+                $this->items[$k] = (new $modelClass())->fill($item->toArray());
             } else {
                 $this->items[$k] = $item;
             }
