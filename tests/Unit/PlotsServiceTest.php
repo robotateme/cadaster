@@ -254,7 +254,7 @@ class PlotsServiceTest extends TestCase
      * @return void
      * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
      */
-    public function test_api_data_sync(): void
+    public function test_api_data_save(): void
     {
         Http::fake([
             config('app.rosstat_url').'/*' => Http::response($this->apiResponsePlotAttrs)
@@ -267,7 +267,7 @@ class PlotsServiceTest extends TestCase
     /**
      * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
      */
-    public function test_db_data_return(): void
+    public function test_db_data_sync_return(): void
     {
         Http::fake([
             config('app.rosstat_url').'/*' => Http::response($this->apiResponsePlotAttrs)
