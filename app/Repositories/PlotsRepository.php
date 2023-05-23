@@ -4,14 +4,12 @@ namespace App\Repositories;
 
 use App\DTOs\PlotsFilterDto;
 use App\DTOs\ApiPlotsListDto;
+use App\Repositories\Contracts\BaseRepository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-class PlotsRepository implements Contracts\PlotsRepositoryInterface
+class PlotsRepository extends BaseRepository implements Contracts\PlotsRepositoryInterface
 {
-
-    public function __construct(private Model $model) {}
-
     /**
      * @param  \App\DTOs\PlotsFilterDto  $filterDto
      * @return \Illuminate\Database\Eloquent\Builder

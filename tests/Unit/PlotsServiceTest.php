@@ -291,6 +291,6 @@ class PlotsServiceTest extends TestCase
         $this->assertDatabaseHas('plots', ['cadastral_number' => 'test:db:id']);
         $newDbPlot = collect($plots)->firstWhere('cadastral_number', 'test:db:id');
 
-        $this->assertTrue($plotDb->updated_at->diff($newDbPlot['updated_at']) == 2);
+        $this->assertTrue($plotDb->updated_at->diff($newDbPlot['updated_at'])->h == 2);
     }
 }
